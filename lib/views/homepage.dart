@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/constant/appcolors.dart';
 import 'package:todo_app/model/taskmodel.dart';
 
@@ -38,13 +39,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarColor,
-        title: const Text(
+        title:  Text(
           "DSTP-ToDo",
-          style: TextStyle(
-            color: AppColors.primaryText,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
+          style: GoogleFonts.lato(color: AppColors.primaryText, fontSize: 29, fontWeight:FontWeight.w800 )
         ),
         centerTitle: true,
       ),

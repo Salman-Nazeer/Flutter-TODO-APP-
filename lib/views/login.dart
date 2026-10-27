@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constant/appcolors.dart';
+import 'package:todo_app/views/dashboard_screen.dart';
 import 'package:todo_app/views/homepage.dart';
 
 class LogInPage extends StatefulWidget {
@@ -235,7 +236,8 @@ class _LogInPageState extends State<LogInPage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const HomePage(),
+                              // builder: (context) => const HomePage(),
+                              builder: (context) => const DashboardScreen(),
                             ),
                           );
                         },
