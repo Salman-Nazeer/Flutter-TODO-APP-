@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/constant/appcolors.dart';
 import 'package:todo_app/model/taskmodel.dart';
 
@@ -31,6 +34,26 @@ class _HomePageState extends State<HomePage> {
 
   bool isTaskCompleted = false;
 
+  convertTaskToString() async {
+    ///Single Todo -> Map -> String
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    TaskModel myTask = TaskModel(
+      title: "Playing footbal",
+      datetime: DateTime(2024, 11, 9),
+      description: "Do it Now",
+    );
+    Map<String, dynamic> newMapTask = myTask.toMap();
+    var newJasonTask = jsonEncode(newMapTask);
+    await prefs.setString('To-Do', newJasonTask);
+  }
+
+  convertStringToTaskModel() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String jsonTask = prefs.getString('To-Do') ?? "";
+    var newjsontask = jsonDecode(jsonTask);
+    TaskModel.fromMap(newjsontask);
+  }
+
   @override
   Widget build(BuildContext context) {
     final sh1 = MediaQuery.of(context).size.height;
@@ -39,9 +62,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarColor,
-        title:  Text(
+        title: Text(
           "DSTP-ToDo",
-          style: GoogleFonts.lato(color: AppColors.primaryText, fontSize: 29, fontWeight:FontWeight.w800 )
+          style: GoogleFonts.lato(
+            color: AppColors.primaryText,
+            fontSize: 29,
+            fontWeight: FontWeight.w800,
+          ),
         ),
         centerTitle: true,
       ),

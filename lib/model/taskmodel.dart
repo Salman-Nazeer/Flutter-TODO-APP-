@@ -11,6 +11,21 @@ class TaskModel {
     this.description,
     this.isChecked = false,
     DateTime? datetime,
-  }) :taskDate = datetime ?? DateTime.now();
+  }) : taskDate = datetime ?? DateTime.now();
 
+  Map<String, dynamic> toMap() {
+    Map<String, dynamic> data = Map<String, dynamic>();
+    data['tilte'] = title;
+    data['description'] = description;
+    data['isChecked'] = isChecked;
+    data['datetime'] = taskDate.toString();
+    return data;
+  }
+
+  TaskModel.fromMap(Map<String, dynamic> data) {
+    title = data['title'];
+    description = data['description'];
+    isChecked = data['isChecked'];
+    taskDate = DateTime.parse(data['datetime'] as String);
+  }
 }
