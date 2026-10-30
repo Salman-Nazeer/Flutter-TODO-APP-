@@ -2,9 +2,7 @@ class TaskModel {
   String title = "";
   String? description;
   bool isChecked = false;
-
-  // DateTime taskDate = DateTime.now();
-  DateTime taskDate;
+  DateTime? taskDate;
 
   TaskModel({
     required this.title,
@@ -15,7 +13,7 @@ class TaskModel {
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = Map<String, dynamic>();
-    data['tilte'] = title;
+    data['title'] = title;
     data['description'] = description;
     data['isChecked'] = isChecked;
     data['datetime'] = taskDate.toString();
@@ -26,6 +24,6 @@ class TaskModel {
     title = data['title'];
     description = data['description'];
     isChecked = data['isChecked'];
-    taskDate = DateTime.parse(data['datetime'] as String);
+    taskDate = DateTime.parse(data['datetime'] ?? DateTime.now().toString());
   }
 }
